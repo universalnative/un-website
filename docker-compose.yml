@@ -1,0 +1,49 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: db
+    environment:
+      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
+      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - MYSQL_USER=${WORDPRESS_DB_USER}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_HOST=172.*.*.*
+    image: mariadb
+    ports:
+      - 3306:3306
+
+  wp:
+    build:
+      context: .
+      dockerfile: Dockerfile-wp
+    command: bash -c 'install_wordpress && apache2-foreground'
+    container_name: wp
+    depends_on:
+      - db
+    env_file: ./.env
+    ports:
+      - 8080:8080
+    user: 1000:1000
+    volumes:
+      - ./wp:/var/www/html
+
+  pma:
+    container_name: pma
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8081:80
+
+  app:
+    build: .
+    command: bash -c 'yarn dev-debug'
+    container_name: app
+    depends_on:
+      - wp
+    ports:
+      - 3000:3000 # main port
+      - 7841:7841 # debug port
+    volumes:
+      - ./:/home/node/app
