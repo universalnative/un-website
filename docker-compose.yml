@@ -47,3 +47,4 @@ services:
       - 7841:7841 # debug port
     volumes:
       - ./:/home/node/app
+      - /home/node/app/node_modules # https://stackoverflow.com/a/32785014/1775160
