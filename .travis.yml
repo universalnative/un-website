@@ -1,0 +1,13 @@
+os: linux
+
+services:
+  - docker
+
+script:
+  - docker-compose up -d
+  - docker-compose ps
+  - docker-compose exec app /bin/bash -c "yarn export"
+
+notifications:
+  email:
+    - we.universalnatives@gmail.com
