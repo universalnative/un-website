@@ -1,5 +1,7 @@
 # Universal Native Website
 
+[![Build Status](https://travis-ci.com/universalnative/un-website.svg?branch=master)](https://travis-ci.com/universalnative/un-website)
+
 A flood of details coming soon...
 
 ### Architecture
