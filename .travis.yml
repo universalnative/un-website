@@ -5,7 +5,7 @@ services:
 
 script:
   - cp .env.example .env
-  - docker-compose up -d -f docker-compose.ci.yml
+  - docker-compose -f docker-compose.ci.yml up -d
   - docker-compose ps
   - docker-compose exec app /bin/bash -c "yarn export"
 
