@@ -1,8 +1,11 @@
 let wpUrl = 'http://localhost:8080/wp-json';
 
-// If we're running on Docker, use the WordPress container hostname instead of localhost.
 if (process.env.HOME === '/home/node') {
+  // If we're running on Docker, use the WordPress container hostname instead of localhost.
   wpUrl = `${process.env.WORDPRESS_URL_INTERNAL}/wp-json`;
+} else if (process.env.NETLIFY === 'true') {
+  // If we're running on Netlify, use the WordPress external hostname instead of localhost.
+  wpUrl = `${process.env.WORDPRESS_URL_EXTERNAL}/wp-json`;
 }
 const Config = {
   apiUrl: wpUrl,
