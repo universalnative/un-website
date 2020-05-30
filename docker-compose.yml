@@ -38,7 +38,7 @@ services:
 
   app:
     build: .
-    command: bash -c 'yarn dev-debug'
+    command: bash -c 'yarn && yarn dev-debug'
     container_name: app
     depends_on:
       - wp
