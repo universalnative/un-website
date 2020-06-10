@@ -47,6 +47,9 @@ wp theme delete twentysixteen twentyseventeen twentynineteen twentytwenty
 
 wp plugin delete akismet hello
 wp plugin install --activate --force \
+    acf-to-wp-api \
+    advanced-custom-fields \
+    custom-post-type-ui \
     jwt-authentication-for-wp-rest-api
 
 wp post delete 1 2

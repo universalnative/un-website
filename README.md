@@ -4,6 +4,8 @@
 
 Universal Native is a distributed community of volunteers working to democratize all information.
 
+---
+
 ### Architecture
 
 #### Application architecture
@@ -24,10 +26,14 @@ Our Next.js app runs in Docker along with 3 other services, each running on a po
 
 There are two Docker Compose files. The main file is, as expected, `docker-compose.yml`, which should be used for local development. `docker-compose.ci.yml` is specific to CI environment, where mounting of host filesystem volumes is undesirable because of ensuing permission issues. See [cdc7877](https://github.com/universalnative/un-website/commit/cdc78771ff0ad214734af3b36636bdf987d4fe20).
 
+---
+
 ### Pre-reqs
 
 - Docker CE (on MacOS, Linux or Windows)
 - VS Code
+
+---
 
 ### Environment Variables
 
@@ -38,6 +44,8 @@ For convenience, a `.env.example` file is included. You can start by making this
 ```bash
 $ cp .env.example .env
 ```
+
+---
 
 ### Running
 
@@ -75,6 +83,31 @@ This command will take several minutes when run the first time. Subsequent runs 
 $ npm i
 ```
 
+---
+
+### Content Authoring in WordPress
+
+WordPress comes with support for two (among others) content types (aka [post types](https://wordpress.org/support/article/post-types/)) -- pages and posts. Our headless WordPress currently supports **custom content types** and **custom fields**.
+
+We may need more content types to help content authors easily manage content for our frontend pages.
+
+Examples of custom content types are:
+
+- podcast episode
+- meetup event
+- team member profile
+- project
+
+Thankfully, there are WP plugins such as [Custom Post Type UI](https://wordpress.org/plugins/custom-post-type-ui/) to help create and manage custom content types in a user-friendly way. The plugin [takes care](https://developer.wordpress.org/rest-api/extending-the-rest-api/adding-rest-api-support-for-custom-content-types/) of exposing custom content types in WP-API.
+
+And then there WP plugins such as [Advanced Custom Fields](https://www.advancedcustomfields.com/) to help create and manage custom fields in a user-friendly way. We can optionally combine club this plugin along with [ACF to WP-API](https://wordpress.org/plugins/acf-to-wp-api/) plugin to control WP-API output.
+
+The first 5-6 mins of this video provide a good overview of using CPTUI and ACF plugins together:
+
+[![WordPress - Custom Post Types UI and Advanced Custom Fields](https://img.youtube.com/vi/MM9sSN4wLtY/0.jpg)](https://www.youtube.com/watch?v=MM9sSN4wLtY)
+
+---
+
 ### Debugging
 
 #### App Code
@@ -104,6 +137,8 @@ We use [Netlify](netlify.com/) to host our statically generated site. Every time
 Refer this Smashing Magazine article on why SSG is a good idea:  
 https://www.smashingmagazine.com/2015/11/modern-static-website-generators-next-big-thing/
 
+---
+
 ### Deploying
 
 There are multiple ways to deploy the site. The recommended way is to:
@@ -117,6 +152,8 @@ Another way is to run the app and all its dependent services (eg. WordPress) as 
 
 Yet another way is to run each service as a separate app in regular (non-container) mode.
 
+---
+
 ### Testing
 
 Run unit tests like so:
@@ -125,6 +162,39 @@ Run unit tests like so:
 $ yarn test
 ```
 
+---
+
+### Reinstalling WordPress
+
+This can be done without destroying all containers and their volumes, and then re-creating them. WordPress installation is done using our custom `install_wordpress.sh` script (inside `docker` folder). This script checks the status of WP's database to decide whether installation should be performed. So installation is performed only when database is empty or it does not exist.
+
+In short, follow these two steps to reinstall WordPress:
+
+1. Reset the database (first "wp" is the name of WordPress container):
+
+```bash
+docker exec wp wp db reset
+```
+
+If `install_wordpress.sh` was modified, rebuild WordPress container to ensure the updated file is copied to the container.
+
+> We are not following the "volume" approach to copy this script as seen in Postlight's [docker-compose.yml](https://github.com/postlight/headless-wp-starter/blob/master/docker-compose.yml). This is because of permission issues when running Docker on Linux. Things probably run fine with volume approach on macOS and Windows, though.
+
+```bash
+docker-compose build wp
+```
+
+2. Restart WordPress container.
+
+---
+
 ### CI/CD
 
 Our website uses [Travis CI](travis-ci.com/) for continuous integration. Our CI pipeline primarily runs linting and unit tests to ensure code quality. A CI build is triggered automatically when a commit is pushed to this repo.
+
+For CD, we use Netlify.
+
+---
+
+Copyleft 2020 • MIT licensed  
+Team Universal Native team@universalnative.org
