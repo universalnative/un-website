@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import WPAPI from 'wpapi';
@@ -14,59 +15,68 @@ const tokenExpired = () => {
   Router.push('/login');
 };
 
-class Index extends Component {
-  state = { id: '' };
+const _getHiddenStuff = () => {
+  const token = localStorage.getItem(Config.AUTH_TOKEN);
+  console.log(`token: ${token}`);
 
-  static async getInitialProps() {
-    const posts = await wp.posts().embed();
-    return { posts };
+  if (token) {
+    wp.setHeaders('Authorization', `Bearer ${token}`);
+    wp.users()
+      .me()
+      .then((me) => {
+        this.setState({ id: me.id });
+      })
+      .catch((e) => {
+        if (e.data.status === 401) {
+          tokenExpired();
+        }
+      });
+  } else {
+    tokenExpired();
   }
+};
 
-  _getHiddenStuff() {
-    const token = localStorage.getItem(Config.AUTH_TOKEN);
-    console.log(`token: ${token}`);
+export const getStaticProps = async () => {
+  wp.members = wp.registerRoute('wp/v2', '/members/(?P<id>\\d+)');
+  const members = await wp.members();
+  return { props: { members } };
+};
 
-    if (token) {
-      wp.setHeaders('Authorization', `Bearer ${token}`);
-      wp.users()
-        .me()
-        .then((me) => {
-          this.setState({ id: me.id });
-        })
-        .catch((e) => {
-          if (e.data.status === 401) {
-            tokenExpired();
-          }
-        });
-    } else {
-      tokenExpired();
-    }
-  }
+const bio = (htmlText) => {
+  return { __html: htmlText };
+};
 
-  componentDidMount() {
-    // this._getHiddenStuff();
-  }
-
-  render() {
-    const { posts } = this.props;
-
-    const fposts = posts.map((post) => {
-      return (
-        <ul key={post.slug}>
-          <li>
-            <Link
-              as={`/post/${post.slug}`}
-              href={`/post?slug=${post.slug}&apiRoute=post`}
-            >
-              <a>{post.title.rendered}</a>
-            </Link>
-          </li>
+const Index = ({ members }) => {
+  return (
+    <>
+      <Head>
+        <title>Universal Native &mdash; Home</title>
+      </Head>
+      <header className='mb-4'>
+        <h1 className='text-5xl'>Universal Native</h1>
+        <h4 className='text-xl text-gray-600'>
+          Welcome to the democratization platform!
+        </h4>
+      </header>
+      <hr />
+      <main className='mt-4'>
+        <h2 className='text-3xl font-thin'>Meet The Team</h2>
+        <ul className='list-disc list-inside m-5'>
+          {members.map((member) => (
+            <li key={member.slug} className='py-2'>
+              <Link
+                as={`/members/${member.slug}`}
+                href={`/members?slug=${member.slug}&apiRoute=member`}
+              >
+                <a className='text-red-600'>{member.title.rendered}</a>
+              </Link>
+              <span dangerouslySetInnerHTML={bio(member.acf.bio)} />
+            </li>
+          ))}
         </ul>
-      );
-    });
-
-    return <div>{fposts}</div>;
-  }
-}
+      </main>
+    </>
+  );
+};
 
 export default Index;
