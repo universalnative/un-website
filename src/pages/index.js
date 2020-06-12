@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import Router from 'next/router';
 import WPAPI from 'wpapi';
+
 import Config from '../config';
+import Header from '../components/header';
+import Hero from '../components/hero';
 
 const wp = new WPAPI({ endpoint: Config.apiUrl, auth: true });
 
@@ -52,29 +54,10 @@ const Index = ({ members }) => {
       <Head>
         <title>Universal Native &mdash; Home</title>
       </Head>
-      <header className='mb-4'>
-        <h1 className='text-5xl'>Universal Native</h1>
-        <h4 className='text-xl text-gray-600'>
-          Welcome to the democratization platform!
-        </h4>
-      </header>
-      <hr />
-      <main className='mt-4'>
-        <h2 className='text-3xl font-thin'>Meet The Team</h2>
-        <ul className='list-disc list-inside m-5'>
-          {members.map((member) => (
-            <li key={member.slug} className='py-2'>
-              <Link
-                as={`/members/${member.slug}`}
-                href={`/members?slug=${member.slug}&apiRoute=member`}
-              >
-                <a className='text-red-600'>{member.title.rendered}</a>
-              </Link>
-              <span dangerouslySetInnerHTML={bio(member.acf.bio)} />
-            </li>
-          ))}
-        </ul>
-      </main>
+
+      <Header />
+
+      <Hero />
     </>
   );
 };
