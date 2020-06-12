@@ -38,17 +38,7 @@ const _getHiddenStuff = () => {
   }
 };
 
-export const getStaticProps = async () => {
-  wp.members = wp.registerRoute('wp/v2', '/members/(?P<id>\\d+)');
-  const members = await wp.members();
-  return { props: { members } };
-};
-
-const bio = (htmlText) => {
-  return { __html: htmlText };
-};
-
-const Index = ({ members }) => {
+const Index = () => {
   return (
     <>
       <Head>
