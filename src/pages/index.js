@@ -4,6 +4,7 @@ import Router from 'next/router';
 import WPAPI from 'wpapi';
 
 import Config from '../config';
+import { wpJsonToProps } from '../util/data-util';
 import Header from '../components/header';
 import Hero from '../components/hero';
 
@@ -38,7 +39,17 @@ const _getHiddenStuff = () => {
   }
 };
 
-const Index = () => {
+export const getStaticProps = async () => {
+  wp.unpages = wp.registerRoute('wp/v2', '/unpages/(?P<id>\\d+)');
+  wp.heroes = wp.registerRoute('wp/v2', '/heroes/(?P<id>\\d+)');
+  const homePage = (await wp.unpages().param('slug', 'home'))[0];
+  const homeHero = (await wp.heroes().param('unpages', homePage.id))[0];
+  return {
+    props: { hero: wpJsonToProps(homeHero) },
+  };
+};
+
+const Index = ({ hero }) => {
   return (
     <>
       <Head>
@@ -47,7 +58,7 @@ const Index = () => {
 
       <Header />
 
-      <Hero />
+      <Hero {...hero} />
     </>
   );
 };
