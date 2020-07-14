@@ -2,8 +2,4 @@
 
 @tailwind components;
 
-body {
-  @apply p-4;
-}
-
 @tailwind utilities;
