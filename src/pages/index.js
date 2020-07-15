@@ -40,13 +40,27 @@ const _getHiddenStuff = () => {
 };
 
 export const getStaticProps = async () => {
+  let props = {};
+
+  const unpage = await wp.taxonomies().taxonomy('unpage');
+  const postTypes = unpage.types;
+
   wp.unpages = wp.registerRoute('wp/v2', '/unpages/(?P<id>\\d+)');
-  wp.heroes = wp.registerRoute('wp/v2', '/heroes/(?P<id>\\d+)');
   const homePage = (await wp.unpages().param('slug', 'home'))[0];
-  const homeHero = (await wp.heroes().param('unpages', homePage.id))[0];
-  return {
-    props: { hero: wpJsonToProps(homeHero) },
-  };
+  const homePageId = homePage.id;
+
+  let promises = [];
+  postTypes.forEach((type) => {
+    wp[type] = wp.registerRoute('wp/v2', `/${type}/(?P<id>\\d+)`);
+    promises.push(wp[type]().param('unpages', homePageId));
+  });
+
+  const results = await Promise.all(promises);
+  postTypes.forEach((type, index) => {
+    props[type] = results[index].map((item) => wpJsonToProps(item));
+  });
+
+  return { props };
 };
 
 const Index = ({ hero }) => {
@@ -58,7 +72,9 @@ const Index = ({ hero }) => {
 
       <Header />
 
-      <Hero {...hero} />
+      {hero.map((h) => (
+        <Hero {...h} />
+      ))}
     </>
   );
 };
