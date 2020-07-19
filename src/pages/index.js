@@ -7,6 +7,7 @@ import Config from '../config';
 import { wpJsonToProps } from '../util/data-util';
 import Header from '../components/header';
 import Hero from '../components/hero';
+import ContentWithPreview from '../components/contentwithpreview';
 
 const wp = new WPAPI({ endpoint: Config.apiUrl, auth: true });
 
@@ -40,30 +41,56 @@ const _getHiddenStuff = () => {
 };
 
 export const getStaticProps = async () => {
-  let props = {};
-
-  const unpage = await wp.taxonomies().taxonomy('unpage');
-  const postTypes = unpage.types;
+  let sections = [];
 
   wp.unpages = wp.registerRoute('wp/v2', '/unpages/(?P<id>\\d+)');
   const homePage = (await wp.unpages().param('slug', 'home'))[0];
   const homePageId = homePage.id;
 
+  wp.pagesections = wp.registerRoute('wp/v2', '/pagesections/(?P<id>\\d+)');
+  const homePageSections = await wp.pagesections().param('unpages', homePageId);
+
   let promises = [];
-  postTypes.forEach((type) => {
-    wp[type] = wp.registerRoute('wp/v2', `/${type}/(?P<id>\\d+)`);
-    promises.push(wp[type]().param('unpages', homePageId));
+  homePageSections.forEach((section) => {
+    const sectionPostType = section.acf.content['post_type'];
+    const sectionPostId = section.acf.content['ID'];
+
+    if (!wp[sectionPostType]) {
+      wp[sectionPostType] = wp.registerRoute(
+        'wp/v2',
+        `/${sectionPostType}/(?P<id>\\d+)`
+      );
+    }
+
+    promises.push(wp[sectionPostType]().id(sectionPostId));
   });
 
-  const results = await Promise.all(promises);
-  postTypes.forEach((type, index) => {
-    props[type] = results[index].map((item) => wpJsonToProps(item));
+  const pageData = await Promise.all(promises);
+  pageData.forEach((sectionData) => {
+    sections.push({
+      id: sectionData.id,
+      type: sectionData.type,
+      data: wpJsonToProps(sectionData),
+    });
   });
 
-  return { props };
+  return { props: { sections } };
 };
 
-const Index = ({ hero }) => {
+const renderSections = (sections) => {
+  return sections.map((section) => {
+    switch (section.type) {
+      case 'hero':
+        return <Hero key={`hero-${section.id}`} {...section.data} />;
+      case 'contentwithpreview':
+        return (
+          <ContentWithPreview key={`cwp-${section.id}`} {...section.data} />
+        );
+    }
+  });
+};
+
+const Index = ({ sections }) => {
   return (
     <>
       <Head>
@@ -72,9 +99,7 @@ const Index = ({ hero }) => {
 
       <Header />
 
-      {hero.map((h) => (
-        <Hero {...h} />
-      ))}
+      {renderSections(sections)}
     </>
   );
 };
