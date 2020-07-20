@@ -78,7 +78,7 @@ export const getStaticProps = async () => {
 };
 
 const renderSections = (sections) => {
-  return sections.map((section) => {
+  return sections.map((section, index) => {
     let sectionJsx = [];
 
     switch (section.type) {
@@ -92,7 +92,9 @@ const renderSections = (sections) => {
         break;
     }
 
-    sectionJsx.push(<hr />);
+    if (index !== 0 && index !== sections.length - 1) {
+      sectionJsx.push(<hr className="my-16" />);
+    }
 
     return sectionJsx;
   });

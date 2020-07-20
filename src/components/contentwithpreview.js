@@ -38,7 +38,7 @@ const ContentWithPreview = ({
   cta,
 }) => {
   return (
-    <section className="cwp flex flex-row items-center mx-16 my-20">
+    <section className="cwp flex flex-row items-center mx-16 my-5">
       {preview_position === 'left' &&
         renderPreview(image_preview, video_preview)}
 
