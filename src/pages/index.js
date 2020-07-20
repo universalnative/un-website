@@ -79,14 +79,22 @@ export const getStaticProps = async () => {
 
 const renderSections = (sections) => {
   return sections.map((section) => {
+    let sectionJsx = [];
+
     switch (section.type) {
       case 'hero':
-        return <Hero key={`hero-${section.id}`} {...section.data} />;
+        sectionJsx.push(<Hero key={`hero-${section.id}`} {...section.data} />);
+        break;
       case 'contentwithpreview':
-        return (
+        sectionJsx.push(
           <ContentWithPreview key={`cwp-${section.id}`} {...section.data} />
         );
+        break;
     }
+
+    sectionJsx.push(<hr />);
+
+    return sectionJsx;
   });
 };
 
