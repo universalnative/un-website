@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CtaButton = ({ url, text, isPrimary }) => {
   const bgClasses =
@@ -9,11 +10,17 @@ const CtaButton = ({ url, text, isPrimary }) => {
   return (
     <a
       href={url}
-      className={`${bgClasses} mx-3 py-4 px-8 text-gray-800 border border-yellow-500`}
+      className={`${bgClasses} py-4 px-8 text-gray-800 border border-yellow-500`}
     >
       {text}
     </a>
   );
+};
+
+CtaButton.propTypes = {
+  isPrimary: PropTypes.bool,
+  text: PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default CtaButton;

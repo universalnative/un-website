@@ -21,13 +21,17 @@ const Hero = ({
         <h2 className="text-5xl mt-8 text-white">{title}</h2>
         <h6 className="mt-8 text-gray-400">{description}</h6>
         <div className="mt-12">
-          <CtaButton
-            url={primaryCta.url}
-            text={primaryCta.title}
-            isPrimary={true}
-          />
+          <span className="mx-3">
+            <CtaButton
+              url={primaryCta.url}
+              text={primaryCta.title}
+              isPrimary={true}
+            />
+          </span>
           {secondaryCta && (
-            <CtaButton url={secondaryCta.url} text={secondaryCta.title} />
+            <span className="mx-3">
+              <CtaButton url={secondaryCta.url} text={secondaryCta.title} />
+            </span>
           )}
         </div>
       </section>
