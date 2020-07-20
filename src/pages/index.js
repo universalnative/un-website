@@ -6,6 +6,7 @@ import WPAPI from 'wpapi';
 import Config from '../config';
 import { wpJsonToProps } from '../util/data-util';
 import Header from '../components/header';
+import Footer from '../components/footer';
 import Hero from '../components/hero';
 import ContentWithPreview from '../components/contentwithpreview';
 
@@ -110,6 +111,8 @@ const Index = ({ sections }) => {
       <Header />
 
       {renderSections(sections)}
+
+      <Footer />
     </>
   );
 };
