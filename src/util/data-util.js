@@ -26,6 +26,10 @@ export const extractTitle = (wpTitle) => {
  * @param {Object} json The data object as received from WP REST API.
  */
 export const wpJsonToProps = (json) => {
+  if (!json || !json.acf) {
+    return {};
+  }
+
   return {
     title: extractTitle(json.title),
     ...json.acf,
