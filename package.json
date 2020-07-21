@@ -7,7 +7,8 @@
     "dev-debug": "NODE_OPTIONS='--inspect=0.0.0.0:7841' next dev",
     "build": "next build",
     "export": "next build && next export",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "dependencies": {
     "next": "9.3.6",
@@ -18,6 +19,9 @@
     "wpapi": "^1.2.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.10.4",
+    "babel-jest": "^26.1.0",
+    "jest": "^26.1.0",
     "postcss-preset-env": "^6.7.0",
     "tailwindcss": "^1.4.6"
   }
