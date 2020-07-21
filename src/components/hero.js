@@ -12,20 +12,29 @@ const Hero = ({
   background_video: bgVideo,
 }) => {
   return (
-    <div className="hero">
-      <div className="h-screen">
-        <div className="hero-bg-video absolute top-0 left-0 bottom-0 right-0 min-w-full min-h-full w-full h-full overflow-hidden z-10">
-          <video autoPlay={true} loop={true} muted={true}>
+    <div className="hero mb-8 md:mb-20 lg:mb-0">
+      <div className="lg:h-screen">
+        <div className="hero-bg-video absolute lg:mt-0 top-0 left-0 bottom-0 right-0 min-w-full lg:min-h-full w-full lg:h-full overflow-hidden z-10">
+          <video
+            className="opacity-75"
+            autoPlay={true}
+            loop={true}
+            muted={true}
+          >
             <source src={bgVideo.url} type={bgVideo.mime_type} />
           </video>
         </div>
-        <section className="hero-content py-20 px-40 inline-block align-middle text-center relative top-0 left-0 bottom-0 right-0 min-w-full min-h-full w-full h-full z-20">
-          <h3 className="hero-subtitle text-lg font-bold text-red-500 uppercase">
+        <section className="hero-content py-3 md:py-6 lg:py-20 lg:px-40 inline-block align-middle text-center relative top-0 left-0 bottom-0 right-0 min-w-full min-h-full w-full h-full z-20">
+          <h3 className="hero-subtitle text-xs md:text-base lg:text-lg font-bold text-red-500 uppercase">
             {subtitle}
           </h3>
-          <h2 className="hero-title text-5xl mt-8 text-white">{title}</h2>
-          <h6 className="hero-desc mt-8 text-gray-400">{description}</h6>
-          <div className="hero-cta mt-12">
+          <h2 className="hero-title text-lg md:text-2xl lg:text-5xl mt-3 lg:mt-8 text-white">
+            {title}
+          </h2>
+          <h6 className="hero-desc hidden md:block mt-3 lg:mt-8 text-xs md:px-8 md:text-base text-gray-400">
+            {description}
+          </h6>
+          <div className="hero-cta mt-4 lg:mt-12">
             <span className="mx-3">
               <CtaButton
                 url={primaryCta.url}

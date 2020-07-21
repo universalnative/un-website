@@ -3,9 +3,9 @@ import React from 'react';
 const Footer = () => {
   return (
     <div className="footer text-center">
-      <div className="footer-content flex flex-row justify-around bg-gray-800 text-xs text-gray-500 py-8">
-        <div className="mx-5 text-left">
-          <p className="brand-logo flex items-center">
+      <div className="footer-content flex flex-wrap justify-around bg-gray-800 text-xs text-gray-500 py-8 sm:text-left">
+        <div className="mx-5 w-full lg:w-auto">
+          <p className="brand-logo flex justify-center lg:justify-start items-center">
             <img
               alt="Logo"
               src="https://avatars3.githubusercontent.com/u/63502522?s=40&v=4"
@@ -17,12 +17,12 @@ const Footer = () => {
               Universal Native
             </a>
           </p>
-          <p className="mt-5">
+          <p className="mt-5 text-center lg:text-left">
             On a mission to make <span className="border-b">all</span>{' '}
             information accessible to <span className="border-b">all</span>.
           </p>
         </div>
-        <div className="mx-5 text-left">
+        <div className="mx-5">
           <h3 className="text-xl text-white my-3">Community</h3>
           <ul>
             <li>Projects</li>
@@ -30,7 +30,7 @@ const Footer = () => {
             <li>Getting Involved</li>
           </ul>
         </div>
-        <div className="mx-5 text-left">
+        <div className="mx-5">
           <h3 className="text-xl text-white my-3">About</h3>
           <ul>
             <li>Organization</li>
@@ -39,7 +39,7 @@ const Footer = () => {
             <li>Manifesto</li>
           </ul>
         </div>
-        <div className="mx-5 text-left">
+        <div className="mx-5">
           <h3 className="text-xl text-white my-3">Contact Us</h3>
           <p className="my-3">101, Dr. Kalam Road, New Delhi 110 001</p>
           <p className="my-3">

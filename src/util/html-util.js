@@ -20,15 +20,7 @@ export const sanitizeHtml = (str) => {
     allowedTags: sanitize.defaults.allowedTags.concat(['iframe', 'img']),
     allowedAttributes: {
       ...sanitize.defaults.allowedAttributes,
-      iframe: [
-        'src',
-        'title',
-        'width',
-        'height',
-        'frameborder',
-        'allow',
-        'allowfullscreen',
-      ],
+      iframe: ['src', 'title', 'frameborder', 'allow', 'allowfullscreen'],
       img: ['src', 'width', 'height', 'class'],
     },
     allowedIframeHostnames: ['www.youtube.com'],

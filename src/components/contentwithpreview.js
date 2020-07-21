@@ -4,15 +4,13 @@ import PropTypes from 'prop-types';
 import { sanitizeHtml } from '../util/html-util';
 import CtaButton from '../components/cta-button';
 
-const renderPreview = (imagePreview, videoPreview) => {
+const renderPreview = (imagePreview, videoPreview, previewPosition) => {
   let preview = '<div></div>';
 
   if (imagePreview) {
     preview = `<img src="${imagePreview.sizes.medium_large}" alt="${
       imagePreview.alt || imagePreview.title
-    }" width="${imagePreview.sizes['medium_large-width']}" height="${
-      imagePreview.sizes['medium_large-height']
-    }" class="max-w-none" />`;
+    }" class="max-w-xs md:max-w-md lg:max-w-none" />`;
   }
 
   if (videoPreview) {
@@ -21,7 +19,9 @@ const renderPreview = (imagePreview, videoPreview) => {
 
   return (
     <div
-      className="cwp-preview mr-5"
+      className={`cwp-preview ${
+        previewPosition === 'left' ? 'lg:mr-5 mb-5' : 'lg:ml-5 mt-8'
+      }`}
       dangerouslySetInnerHTML={{
         __html: sanitizeHtml(preview),
       }}
@@ -38,11 +38,11 @@ const ContentWithPreview = ({
   cta,
 }) => {
   return (
-    <section className="cwp flex flex-row items-center mx-16 my-5">
+    <section className="cwp flex flex-wrap lg:flex-no-wrap items-center mx-8 lg:mx-16 my-5">
       {preview_position === 'left' &&
-        renderPreview(image_preview, video_preview)}
+        renderPreview(image_preview, video_preview, preview_position)}
 
-      <div className="cwp-content ml-5">
+      <div className="cwp-content lg:ml-5 flex-grow w-full">
         <h3 className="cwp-content-heading text-3xl">{title}</h3>
         <div
           className="cwp-content-text mt-5 text-gray-600"
@@ -56,7 +56,7 @@ const ContentWithPreview = ({
       </div>
 
       {preview_position === 'right' &&
-        renderPreview(image_preview, video_preview)}
+        renderPreview(image_preview, video_preview, preview_position)}
     </section>
   );
 };

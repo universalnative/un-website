@@ -6,7 +6,10 @@ const NavLink = ({ text, url, isButton }) => {
     : 'text-gray-700 hover:text-gray-800';
 
   return (
-    <a href={url} className={`nav-link py-2 px-4 ${buttonClasses}`}>
+    <a
+      href={url}
+      className={`nav-link block text-sm lg:text-base text-center lg:inline-block py-2 px-4 ${buttonClasses}`}
+    >
       {text}
     </a>
   );

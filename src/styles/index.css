@@ -1,5 +1,19 @@
 @tailwind base;
 
+@media (min-width: 768px) {
+  .cwp-preview iframe {
+    width: 480px;
+    height: 270px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cwp-preview iframe {
+    width: 640px;
+    height: 360px;
+  }
+}
+
 @tailwind components;
 
 @tailwind utilities;
