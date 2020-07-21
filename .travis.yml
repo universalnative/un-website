@@ -7,7 +7,7 @@ script:
   - cp .env.example .env
   - docker-compose -f docker-compose.ci.yml up -d
   - docker-compose ps
-  - docker-compose exec app /bin/bash -c "yarn export"
+  - docker-compose exec app /bin/bash -c "yarn test"
 
 notifications:
   email:
