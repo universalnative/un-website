@@ -50,7 +50,8 @@ wp plugin install --activate --force \
     acf-to-wp-api \
     advanced-custom-fields \
     custom-post-type-ui \
-    jwt-authentication-for-wp-rest-api
+    jwt-authentication-for-wp-rest-api \
+    post-types-order
 
 wp post delete 1 2
 
