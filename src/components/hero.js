@@ -16,7 +16,7 @@ const Hero = ({
       <div className="lg:h-screen">
         <div className="hero-bg-video absolute lg:mt-0 top-0 left-0 bottom-0 right-0 min-w-full lg:min-h-full w-full lg:h-full overflow-hidden z-10">
           <video
-            className="opacity-75"
+            className="opacity-75 min-w-full"
             autoPlay={true}
             loop={true}
             muted={true}
