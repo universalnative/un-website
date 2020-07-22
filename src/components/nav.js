@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import WPAPI from 'wpapi';
 
 import Config from '../config';
@@ -34,15 +35,19 @@ const Nav = () => {
   return (
     <nav className="nav flex flex-wrap justify-between items-center">
       <div className="nav-brand flex items-center flex-shrink-0">
-        <a href="#">
-          <img
-            alt="Logo"
-            src="https://avatars3.githubusercontent.com/u/63502522?s=40&v=4"
-          />
-        </a>
-        <a href="#" className="text-xl md:text-2xl lg:text-3xl text-blue-700">
-          Universal Native
-        </a>
+        <Link href="/[...slug]" as="/home">
+          <a>
+            <img
+              alt="Logo"
+              src="https://avatars3.githubusercontent.com/u/63502522?s=40&v=4"
+            />
+          </a>
+        </Link>
+        <Link href="/[...slug]" as="/home">
+          <a className="text-xl md:text-2xl lg:text-3xl text-blue-700">
+            Universal Native
+          </a>
+        </Link>
       </div>
       <div className="block lg:hidden">
         <button
