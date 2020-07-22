@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import Router from 'next/router';
 import WPAPI from 'wpapi';
 
 import Config from '../config';
 import { wpJsonToProps } from '../util/data-util';
+import { makeTitle } from '../util/html-util';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
@@ -12,40 +12,23 @@ import ContentWithPreview from '../components/contentwithpreview';
 
 const wp = new WPAPI({ endpoint: Config.apiUrl, auth: true });
 
-const tokenExpired = () => {
-  if (process.browser) {
-    localStorage.removeItem(Config.AUTH_TOKEN);
-  }
-  wp.setHeaders('Authorization', '');
-  Router.push('/login');
-};
+export async function getStaticPaths() {
+  wp.unpages = wp.registerRoute('wp/v2', '/unpages/(?P<id>\\d+)');
+  const unpages = await wp.unpages();
 
-const _getHiddenStuff = () => {
-  const token = localStorage.getItem(Config.AUTH_TOKEN);
-  console.log(`token: ${token}`);
+  return {
+    paths: unpages.map((p) => ({ params: { slug: [p.slug] } })),
+    fallback: false,
+  };
+}
 
-  if (token) {
-    wp.setHeaders('Authorization', `Bearer ${token}`);
-    wp.users()
-      .me()
-      .then((me) => {
-        this.setState({ id: me.id });
-      })
-      .catch((e) => {
-        if (e.data.status === 401) {
-          tokenExpired();
-        }
-      });
-  } else {
-    tokenExpired();
-  }
-};
+export const getStaticProps = async ({ params }) => {
+  const slug = (params.slug && params.slug.join('/')) || 'home';
 
-export const getStaticProps = async () => {
   let sections = [];
 
   wp.unpages = wp.registerRoute('wp/v2', '/unpages/(?P<id>\\d+)');
-  const homePage = (await wp.unpages().param('slug', 'home'))[0];
+  const homePage = (await wp.unpages().param('slug', slug))[0];
   const homePageId = homePage.id;
 
   wp.pagesections = wp.registerRoute('wp/v2', '/pagesections/(?P<id>\\d+)');
@@ -75,7 +58,7 @@ export const getStaticProps = async () => {
     });
   });
 
-  return { props: { sections } };
+  return { props: { sections, slug } };
 };
 
 const renderSections = (sections) => {
@@ -101,11 +84,11 @@ const renderSections = (sections) => {
   });
 };
 
-const Index = ({ sections }) => {
+const Page = ({ sections, slug }) => {
   return (
     <>
       <Head>
-        <title>Universal Native &mdash; Home</title>
+        <title>Universal Native &mdash; {makeTitle(slug)}</title>
       </Head>
 
       <Header />
@@ -117,4 +100,4 @@ const Index = ({ sections }) => {
   );
 };
 
-export default Index;
+export default Page;
