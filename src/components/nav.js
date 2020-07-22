@@ -67,12 +67,12 @@ const Nav = () => {
           .map((slug) => (
             <NavLink
               key={slug}
-              url="#"
+              slug={slug}
               text={makeTitle(slug)}
               isButton={false}
             />
           ))}
-        <NavLink url="#" text="Join Us" isButton={true} />
+        <NavLink slug="join-us" text="Join Us" isButton={true} />
       </div>
     </nav>
   );
