@@ -1,5 +1,28 @@
 @tailwind base;
 
+.cwp-content-text ol {
+  @apply list-inside list-decimal;
+}
+
+.cwp-content-text li {
+  @apply list-inside list-disc;
+}
+
+.cwp-content-text h2 {
+  @apply text-2xl my-4;
+}
+
+.cwp-content-text h3,
+h4,
+h5,
+h6 {
+  @apply text-xl my-3;
+}
+
+.cwp-content-text a {
+  @apply underline;
+}
+
 @media (min-width: 768px) {
   .cwp-preview iframe {
     width: 480px;
