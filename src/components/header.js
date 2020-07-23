@@ -1,8 +1,17 @@
+/**
+ * The page header component.
+ * A simple container for the `Nav` component.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-06-12
+ */
+
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import Nav from './nav';
 
-const Header = () => {
+const Header = ({ navlinks }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const handleScroll = (e) => {
@@ -27,9 +36,13 @@ const Header = () => {
         isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
       }`}
     >
-      <Nav />
+      <Nav links={navlinks} />
     </header>
   );
+};
+
+Header.propTypes = {
+  navlinks: PropTypes.array,
 };
 
 export default Header;
