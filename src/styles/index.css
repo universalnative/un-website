@@ -4,8 +4,15 @@
   @apply list-inside list-decimal;
 }
 
-.cwp-content-text li {
+.cwp-content-text ul {
   @apply list-inside list-disc;
+}
+
+.cwp-content-text ol,
+.cwp-content-text ul,
+.cwp-content-text p,
+.cwp-content-text blockquote {
+  @apply mb-3;
 }
 
 .cwp-content-text h2 {
@@ -21,6 +28,10 @@ h6 {
 
 .cwp-content-text a {
   @apply underline;
+}
+
+.cwp-content-text blockquote {
+  @apply pl-3 border-l-4 border-blue-500;
 }
 
 @media (min-width: 768px) {

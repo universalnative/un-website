@@ -22,6 +22,8 @@ export const sanitizeHtml = (str) => {
       ...sanitize.defaults.allowedAttributes,
       iframe: ['src', 'title', 'frameborder', 'allow', 'allowfullscreen'],
       img: ['src', 'width', 'height', 'class'],
+      p: ['style'],
+      span: ['style'],
     },
     allowedIframeHostnames: ['www.youtube.com'],
   });
