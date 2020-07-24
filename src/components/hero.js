@@ -15,7 +15,7 @@ const Hero = ({
   return (
     <div className="hero mb-8 md:mb-20 lg:mb-0">
       <div className="lg:h-screen">
-        <div className="hero-bg absolute lg:mt-0 top-0 left-0 bottom-0 right-0 min-w-full lg:min-h-full w-full lg:h-full overflow-hidden z-10">
+        <div className="hero-bg absolute lg:mt-0 top-0 left-0 right-0 min-w-full lg:min-h-full w-full lg:h-full overflow-hidden z-10">
           {bgVideo && (
             <video
               className="opacity-75 min-w-full"

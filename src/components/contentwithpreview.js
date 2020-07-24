@@ -19,7 +19,7 @@ const renderPreview = (imagePreview, videoPreview, previewPosition) => {
 
   return (
     <div
-      className={`cwp-preview ${
+      className={`cwp-preview mx-auto ${
         previewPosition === 'left' ? 'lg:mr-5 mb-5' : 'lg:ml-5 mt-8'
       }`}
       dangerouslySetInnerHTML={{
@@ -38,7 +38,7 @@ const ContentWithPreview = ({
   cta,
 }) => {
   return (
-    <section className="cwp flex flex-wrap lg:flex-no-wrap items-center mx-8 lg:mx-16 my-5">
+    <section className="cwp flex flex-wrap lg:flex-no-wrap items-center mx-4 lg:mx-16 my-5">
       {preview_position === 'left' &&
         renderPreview(image_preview, video_preview, preview_position)}
 

@@ -125,7 +125,7 @@ const renderSections = (sections) => {
     }
 
     if (index !== 0 && index !== sections.length - 1) {
-      sectionJsx.push(<hr className="my-16" />);
+      sectionJsx.push(<hr className="my:8 lg:my-16" />);
     }
 
     return sectionJsx;
