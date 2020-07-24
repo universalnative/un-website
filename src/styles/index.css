@@ -34,6 +34,14 @@ h6 {
   @apply pl-3 border-l-4 border-blue-500;
 }
 
+header.bg-white .nav-link:not(.nav-button) {
+  @apply text-gray-700;
+}
+
+header.bg-white .nav-link:hover {
+  @apply text-gray-800;
+}
+
 @media (min-width: 768px) {
   .cwp-preview iframe {
     width: 480px;
