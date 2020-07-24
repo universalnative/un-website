@@ -63,8 +63,8 @@ const ContentWithPreview = ({
 
 ContentWithPreview.propTypes = {
   content: PropTypes.string,
-  cta: PropTypes.object,
-  image_preview: PropTypes.object,
+  cta: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  image_preview: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   preview_position: PropTypes.string,
   title: PropTypes.string,
   video_preview: PropTypes.string,
