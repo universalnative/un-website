@@ -13,25 +13,37 @@ const Hero = ({
   background_image: bgImg,
 }) => {
   return (
-    <div className="hero mb-8 md:mb-20 lg:mb-0">
-      <div className="lg:h-screen">
-        <div className="hero-bg absolute lg:mt-0 top-0 left-0 right-0 min-w-full lg:min-h-full w-full lg:h-full overflow-hidden z-10">
-          {bgVideo && (
-            <video
-              className="opacity-75 min-w-full"
-              autoPlay={true}
-              loop={true}
-              muted={true}
-            >
-              <source src={bgVideo.url} type={bgVideo.mime_type} />
-            </video>
-          )}
+    <div className="hero">
+      <div className="h-screen table w-full">
+        <div className="hero-bg">
           {bgImg && (
-            <img className="bg-cover w-full" src={bgImg.sizes['2048x2048']} />
+            <div
+              className="hero-bg-img absolute top-0 left-0 right-0 bottom-0 min-h-full bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${bgImg.sizes['2048x2048']})`,
+              }}
+            ></div>
+          )}
+          {!bgImg && bgVideo && (
+            <div className="hero-bg-vid">
+              <video
+                className="absolute min-w-full min-h-full w-auto h-auto bg-cover"
+                style={{
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translateX(-50%) translateY(-50%)',
+                }}
+                autoPlay={true}
+                loop={true}
+                muted={true}
+              >
+                <source src={bgVideo.url} type={bgVideo.mime_type} />
+              </video>
+            </div>
           )}
         </div>
-        <section className="hero-content py-3 md:py-6 lg:py-20 lg:px-40 inline-block align-middle text-center relative top-0 left-0 bottom-0 right-0 min-w-full min-h-full w-full h-full z-20">
-          <h3 className="hero-subtitle text-xs md:text-base lg:text-lg font-bold text-red-500 uppercase">
+        <section className="hero-content table-cell mx-auto align-middle text-center relative top-0 left-0 bottom-0 right-0 z-20">
+          <h3 className="hero-subtitle text-xs md:text-base lg:text-lg font-bold text-red-500 uppercase inline-block bg-black p-2 bg-opacity-50 rounded-md">
             {subtitle}
           </h3>
           <h2 className="hero-title text-lg md:text-2xl lg:text-5xl mt-3 lg:mt-8 text-white">
