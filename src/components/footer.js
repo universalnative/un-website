@@ -18,25 +18,39 @@ const Footer = () => {
             </a>
           </p>
           <p className="mt-5 text-center lg:text-left">
-            On a mission to make <span className="border-b">all</span>{' '}
-            information accessible to <span className="border-b">all</span>.
+            On a mission to make <b>all</b> information accessible to <b>all</b>
+            .
           </p>
         </div>
         <div className="mx-5">
           <h3 className="text-xl text-white my-3">Community</h3>
           <ul>
-            <li>Projects</li>
-            <li>Blog</li>
-            <li>Getting Involved</li>
+            <li>
+              <a href="#">Projects</a>
+            </li>
+            <li>
+              <a href="#">Blog</a>
+            </li>
+            <li>
+              <a href="#">Getting Involved</a>
+            </li>
           </ul>
         </div>
         <div className="mx-5">
           <h3 className="text-xl text-white my-3">About</h3>
           <ul>
-            <li>Organization</li>
-            <li>Team</li>
-            <li>Partners</li>
-            <li>Manifesto</li>
+            <li>
+              <a href="#">Organization</a>
+            </li>
+            <li>
+              <a href="#">Team</a>
+            </li>
+            <li>
+              <a href="#">Partners</a>
+            </li>
+            <li>
+              <a href="#">Manifesto</a>
+            </li>
           </ul>
         </div>
         <div className="mx-5">
