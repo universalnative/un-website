@@ -46,3 +46,12 @@ export const makeTitle = (slug) => {
 
   return words.join(' ');
 };
+
+/**
+ * Returns the value of cookie stored as given name.
+ */
+export const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+};

@@ -14,6 +14,7 @@ import { wpJsonToProps } from '../util/data-util';
 import { makeTitle } from '../util/html-util';
 import Header from '../components/header';
 import Footer from '../components/footer';
+import CookiePopup from '../components/cookie-popup';
 import Hero from '../components/hero';
 import ContentWithPreview from '../components/contentwithpreview';
 import Carousel from '../components/carousel';
@@ -159,6 +160,8 @@ const Page = ({ sections, slug, navlinks }) => {
       <Head>
         <title>Universal Native &mdash; {makeTitle(slug)}</title>
       </Head>
+
+      <CookiePopup />
 
       <Header isHeroPresent={isHeroPresent} navlinks={navlinks} />
 
