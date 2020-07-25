@@ -8,7 +8,7 @@
     "build": "next build",
     "export": "next build && next export",
     "start": "next start",
-    "test": "jest"
+    "test": "jest --verbose"
   },
   "dependencies": {
     "@brainhubeu/react-carousel": "2.0.0-rc.2",
