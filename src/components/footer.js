@@ -62,13 +62,23 @@ const Footer = () => {
         </div>
         <div className="mx-5">
           <h3 className="text-xl text-white my-3">Contact Us</h3>
-          <p className="my-3">101, Dr. Kalam Road, New Delhi 110 001</p>
           <p className="my-3">
             <a
               className="text-yellow-200"
               href="mailto:team@universalnative.org"
             >
               team@universalnative.org
+            </a>
+          </p>
+          <p className="social-media mt-2">
+            <a className="inline-block mr-2" href="https://facebook.com">
+              <img src="/facebook.png" alt="Facebook logo" width="32" />
+            </a>
+            <a className="inline-block mr-2" href="https://twitter.com">
+              <img src="/twitter.png" alt="Twitter logo" width="32" />
+            </a>
+            <a className="inline-block mr-2" href="https://linkedin.com">
+              <img src="/linkedin.png" alt="LinkedIn logo" width="32" />
             </a>
           </p>
         </div>
