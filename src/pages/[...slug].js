@@ -16,6 +16,7 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import Hero from '../components/hero';
 import ContentWithPreview from '../components/contentwithpreview';
+import Carousel from '../components/carousel';
 
 /**
  * Configure WPAPI.
@@ -26,6 +27,12 @@ const wp = new WPAPI({ endpoint: Config.apiUrl, auth: true });
 wp.unpages = wp.registerRoute('wp/v2', '/unpages/(?P<id>\\d+)');
 wp.navlinks = wp.registerRoute('wp/v2', '/navlinks/(?P<id>\\d+)');
 wp.pagesections = wp.registerRoute('wp/v2', '/pagesections/(?P<id>\\d+)');
+wp.hero = wp.registerRoute('wp/v2', '/heroes/(?P<id>\\d+)');
+wp.contentwithpreview = wp.registerRoute(
+  'wp/v2',
+  '/contentwithpreview/(?P<id>\\d+)'
+);
+wp.carousel = wp.registerRoute('wp/v2', '/carousels/(?P<id>\\d+)');
 
 /**
  * Returns a list of all page (route) objects.
@@ -80,24 +87,21 @@ export const getStaticProps = async ({ params }) => {
     const sectionPostType = section.acf.content['post_type'];
     const sectionPostId = section.acf.content['ID'];
 
-    if (!wp[sectionPostType]) {
-      wp[sectionPostType] = wp.registerRoute(
-        'wp/v2',
-        `/${sectionPostType}/(?P<id>\\d+)`
-      );
-    }
-
     promises.push(wp[sectionPostType]().id(sectionPostId));
   });
 
-  const pageData = await Promise.all(promises);
-  pageData.forEach((sectionData) => {
-    sections.push({
-      id: sectionData.id,
-      type: sectionData.type,
-      data: wpJsonToProps(sectionData),
+  try {
+    const pageData = await Promise.all(promises);
+    pageData.forEach((sectionData) => {
+      sections.push({
+        id: sectionData.id,
+        type: sectionData.type,
+        data: wpJsonToProps(sectionData),
+      });
     });
-  });
+  } catch (e) {
+    console.log(e);
+  }
 
   // Get nav links for the Header
   const navlinks = await getAllNavlinks();
@@ -120,6 +124,11 @@ const renderSections = (sections) => {
       case 'contentwithpreview':
         sectionJsx.push(
           <ContentWithPreview key={`cwp-${section.id}`} {...section.data} />
+        );
+        break;
+      case 'carousel':
+        sectionJsx.push(
+          <Carousel key={`carousel-${section.id}`} {...section.data} />
         );
         break;
     }

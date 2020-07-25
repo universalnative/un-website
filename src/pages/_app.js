@@ -1,6 +1,7 @@
 import App from 'next/app';
 
 import '../styles/index.css';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
