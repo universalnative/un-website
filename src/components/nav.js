@@ -24,10 +24,7 @@ const Nav = ({ links }) => {
       <div className="nav-brand flex items-center flex-shrink-0">
         <Link href="/[...slug]" as="/home">
           <a>
-            <img
-              alt="Logo"
-              src="https://avatars3.githubusercontent.com/u/63502522?s=40&v=4"
-            />
+            <img alt="Logo" src="/un-logo.png" />
           </a>
         </Link>
         <Link href="/[...slug]" as="/home">

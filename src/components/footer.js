@@ -6,10 +6,7 @@ const Footer = () => {
       <div className="footer-content flex flex-wrap justify-around bg-gray-800 text-xs text-gray-500 py-8 sm:text-left">
         <div className="mx-5 w-full lg:w-auto">
           <p className="brand-logo flex justify-center lg:justify-start items-center">
-            <img
-              alt="Logo"
-              src="https://avatars3.githubusercontent.com/u/63502522?s=40&v=4"
-            />
+            <img alt="Logo" src="/un-logo.png" />
             <a
               href="https://universalnative.org"
               className="text-xl text-white"

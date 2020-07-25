@@ -159,6 +159,7 @@ const Page = ({ sections, slug, navlinks }) => {
     <>
       <Head>
         <title>Universal Native &mdash; {makeTitle(slug)}</title>
+        <link rel="icon" type="image/png" href="/un-logo.png"></link>
       </Head>
 
       <CookiePopup />
