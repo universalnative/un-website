@@ -6,6 +6,26 @@ Universal Native is a distributed community of volunteers working to democratize
 
 ---
 
+### Table of Contents
+
+- [Architecture](#architecture)
+  - [Application architecture](#application-architecture)
+  - [Docker setup](#docker-setup)
+- [Pre-reqs](#pre-reqs)
+- [Environment Variables](#environment-variables)
+- [Running](#running)
+- [Content Authoring in WordPress](#content-authoring-in-wordPress)
+- [Debugging](#debugging)
+  - [App Code](#app-code)
+  - [Database](#database)
+- [Static Site Generation (SSG)](#static-site-generation-ssg)
+- [Deploying](#deploying)
+- [Testing](#testing)
+- [Reinstalling WordPress](#reinstalling-wordpress)
+- [CI/CD](#cicd)
+
+---
+
 ### Architecture
 
 #### Application architecture
@@ -77,15 +97,11 @@ This command will take several minutes when run the first time. Subsequent runs 
 >
 > `app | [ ready ] compiled successfully - ready on http://localhost:3000`
 
-5. (optional) Install NPM packages locally (on host). This will be helpful in debugging locally.
-
-```bash
-$ npm i
-```
-
 ---
 
 ### Content Authoring in WordPress
+
+> CPT UI and ACF presets specific to the Universal Native website can be found inside `setup` folder. These can be imported in WordPress via the **Tools** page of both plugins' settings.
 
 WordPress comes with support for two (among others) content types (aka [post types](https://wordpress.org/support/article/post-types/)) -- pages and posts. Our headless WordPress currently supports **custom content types** and **custom fields**.
 
@@ -93,8 +109,9 @@ We may need more content types to help content authors easily manage content for
 
 Examples of custom content types are:
 
-- podcast episode
-- meetup event
+- hero
+- content section
+- navigation link
 - team member profile
 - project
 
@@ -125,6 +142,8 @@ When the App container is up, the Node process starts listening on port 7841 for
 [phpMyAdmin](https://www.phpmyadmin.net/) runs in a Docker container alongside the app. PMA is a useful tool to visualize the WordPress' database and potentially troubleshoot issues.
 
 Visit http://localhost:8081 to open PMA. Login credentials are the values for `WORDPRESS_DB_USER` and `WORDPRESS_DB_PASSWORD` variables as specified in your .env file.
+
+---
 
 ### Static Site Generation (SSG)
 
