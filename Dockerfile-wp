@@ -18,7 +18,7 @@ RUN curl -sL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cl
   chown www-data:www-data /var/www/.wp-cli
 
 # install_wordpress.sh script
-COPY --chown=www-data:www-data ./docker/install_wordpress.sh /usr/local/bin/install_wordpress
+COPY --chown=www-data:www-data ./setup/install_wordpress.sh /usr/local/bin/install_wordpress
 RUN chmod +x /usr/local/bin/install_wordpress
 
 # ensure wordpress has write permission on linux host
