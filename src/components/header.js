@@ -11,14 +11,16 @@ import PropTypes from 'prop-types';
 
 import Nav from './nav';
 
-const Header = ({ navlinks }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const Header = ({ navlinks, isHeroPresent }) => {
+  const [headerBgClass, setHeaderBgClass] = useState(
+    isHeroPresent ? 'bg-transparent' : 'bg-white shadow-md'
+  );
 
-  const handleScroll = (e) => {
+  const handleScroll = () => {
     if (window.scrollY > 0) {
-      setIsScrolled(true);
+      setHeaderBgClass('bg-white shadow-md');
     } else {
-      setIsScrolled(false);
+      setHeaderBgClass('bg-transparent');
     }
   };
 
@@ -33,7 +35,7 @@ const Header = ({ navlinks }) => {
   return (
     <header
       className={`sticky top-0 p-2 md:p-4 z-50 transition-colors duration-200 ${
-        isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
+        isHeroPresent ? headerBgClass : 'bg-white shadow-md'
       }`}
     >
       <Nav links={navlinks} />
@@ -43,6 +45,7 @@ const Header = ({ navlinks }) => {
 
 Header.propTypes = {
   navlinks: PropTypes.array,
+  isHeroPresent: PropTypes.bool,
 };
 
 export default Header;

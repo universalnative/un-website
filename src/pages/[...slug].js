@@ -152,13 +152,15 @@ const renderSections = (sections) => {
  * - SSG-friendly
  */
 const Page = ({ sections, slug, navlinks }) => {
+  const isHeroPresent = sections.filter((s) => s.type === 'hero').length > 0;
+
   return (
     <>
       <Head>
         <title>Universal Native &mdash; {makeTitle(slug)}</title>
       </Head>
 
-      <Header navlinks={navlinks} />
+      <Header isHeroPresent={isHeroPresent} navlinks={navlinks} />
 
       {renderSections(sections)}
 
