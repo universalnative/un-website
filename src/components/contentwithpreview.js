@@ -1,3 +1,12 @@
+/**
+ * ContentWithPreview component.
+ *
+ * Displays content (heading + text) along with an image or video on left or right of content.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-07-20
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 

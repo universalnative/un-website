@@ -1,5 +1,6 @@
 /**
- * The page header component.
+ * Header component.
+ *
  * A simple container for the `Nav` component.
  *
  * @author Anurag Bhandari <ab@anuragbhandari.com>

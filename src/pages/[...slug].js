@@ -1,6 +1,15 @@
 /**
  * Catch-all dynamic route page template.
  *
+ * It represents all content pages on the site.
+ *
+ * Using this pattern over a Layout component has its benefits:
+ *
+ * - no requirement for a Layout HOC and wiring it up in _app.js
+ * - common page data, such as navlinks, can be fetched on server-side (components and App do not support this)
+ * - a clean and central place for all SSR stuff
+ * - SSG-friendly
+ *
  * @author Anurag Bhandari <ab@anuragbhandari.com>
  * @since  2020-07-22
  */
@@ -142,16 +151,6 @@ const renderSections = (sections) => {
   });
 };
 
-/**
- * Our main page template. It represents all content pages on the site.
- *
- * Using this pattern over a Layout component has its benefits:
- *
- * - no requirement for a Layout HOC and wiring it up in _app.js
- * - common page data, such as navlinks, can be fetched on server-side (components and App do not support this)
- * - a clean and central place for all SSR stuff
- * - SSG-friendly
- */
 const Page = ({ sections, slug, navlinks }) => {
   const isHeroPresent = sections.filter((s) => s.type === 'hero').length > 0;
 

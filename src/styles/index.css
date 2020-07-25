@@ -1,3 +1,12 @@
+/**
+ * Global CSS.
+ *
+ * Reusable CSS rules on top of Tailwind's out-of-the-box styles.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-06-12
+ */
+
 @tailwind base;
 
 .cwp-content-text ol {

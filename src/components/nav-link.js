@@ -1,3 +1,13 @@
+/**
+ * NavLink component.
+ *
+ * Represents a navigation link in NavBar.
+ * Can appear like a link or a button based on props.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-06-12
+ */
+
 import React from 'react';
 import Link from 'next/link';
 

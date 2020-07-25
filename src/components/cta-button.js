@@ -1,3 +1,13 @@
+/**
+ * CtaButton component.
+ *
+ * A button styled to reflect a call-to-action.
+ * Currently used in Hero and CWP, but is flexible to be used anywhere.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-06-12
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 

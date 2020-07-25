@@ -1,3 +1,10 @@
+/**
+ * Global configuration.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-05-18
+ */
+
 let wpUrl = 'http://localhost:8080/wp-json';
 
 if (process.env.HOME === '/home/node') {

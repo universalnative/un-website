@@ -1,3 +1,13 @@
+/**
+ * Hero component.
+ *
+ * Shows fullscreen content (title + subtitle + description) on top of an image or video background.
+ * When present, it is the only above-the-fold content component on a page.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-06-12
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 

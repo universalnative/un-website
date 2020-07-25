@@ -1,3 +1,13 @@
+/**
+ * App component.
+ *
+ * The root component that wraps all other components.
+ * Global configurations and CSS imports end up here.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-06-12
+ */
+
 import App from 'next/app';
 
 import '../styles/index.css';

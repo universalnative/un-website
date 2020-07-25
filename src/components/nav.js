@@ -1,3 +1,14 @@
+/**
+ * Nav component.
+ *
+ * Displays a top navigation bar inside the Header.
+ * Wraps site's brand (logo + name) and customizable page links.
+ * Responsively collapses nav links into a hamburger menu on non-desktop viewports.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-06-12
+ */
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';

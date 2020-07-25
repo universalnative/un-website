@@ -1,3 +1,13 @@
+/**
+ * Footer component.
+ *
+ * A very static footer with preset text & icons and hard-coded links.
+ * 4-column on desktop, 3-column on tablet and 2-column on mobile.
+ *
+ * @author Anurag Bhandari <ab@anuragbhandari.com>
+ * @since  2020-07-20
+ */
+
 import React from 'react';
 
 const Footer = () => {
