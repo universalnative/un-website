@@ -19,7 +19,7 @@ const renderPreview = (imagePreview, videoPreview, previewPosition) => {
   if (imagePreview) {
     preview = `<img src="${imagePreview.sizes.medium_large}" alt="${
       imagePreview.alt || imagePreview.title
-    }" class="max-w-xs md:max-w-md lg:max-w-none" />`;
+    }" class="min-w-full lg:max-w-none" />`;
   }
 
   if (videoPreview) {
@@ -47,11 +47,11 @@ const ContentWithPreview = ({
   cta,
 }) => {
   return (
-    <section className="cwp flex flex-wrap lg:flex-no-wrap items-center mx-4 lg:mx-16 my-5">
+    <section className="cwp flex flex-wrap lg:flex-no-wrap items-center lg:mx-16 my-5">
       {preview_position === 'left' &&
         renderPreview(image_preview, video_preview, preview_position)}
 
-      <div className="cwp-content lg:ml-5 flex-grow w-full">
+      <div className="cwp-content mx-4 lg:mx-0 lg:ml-5 flex-grow w-full">
         <h3 className="cwp-content-heading text-3xl">{title}</h3>
         <div
           className="cwp-content-text mt-5 text-gray-600"
