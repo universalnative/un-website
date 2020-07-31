@@ -334,7 +334,140 @@ function cptui_register_my_cpts() {
 	];
 
 	register_post_type( "carousel", $args );
+
+	/**
+	 * Post Type: Team Members.
+	 */
+
+	$labels = [
+		"name" => __( "Team Members", "custom-post-type-ui" ),
+		"singular_name" => __( "Team Member", "custom-post-type-ui" ),
+		"menu_name" => __( "Team Members", "custom-post-type-ui" ),
+		"all_items" => __( "All Team Members", "custom-post-type-ui" ),
+		"add_new" => __( "Add new", "custom-post-type-ui" ),
+		"add_new_item" => __( "Add new Team Member", "custom-post-type-ui" ),
+		"edit_item" => __( "Edit Team Member", "custom-post-type-ui" ),
+		"new_item" => __( "New Team Member", "custom-post-type-ui" ),
+		"view_item" => __( "View Team Members", "custom-post-type-ui" ),
+		"view_items" => __( "View Team Members", "custom-post-type-ui" ),
+		"search_items" => __( "Search Team Members", "custom-post-type-ui" ),
+		"not_found" => __( "No Team Members found", "custom-post-type-ui" ),
+		"not_found_in_trash" => __( "No Team Members found in trash", "custom-post-type-ui" ),
+		"parent" => __( "Parent Team Members:", "custom-post-type-ui" ),
+		"featured_image" => __( "Featured image for this Team Member", "custom-post-type-ui" ),
+		"set_featured_image" => __( "Set featured image for this Team Member", "custom-post-type-ui" ),
+		"remove_featured_image" => __( "Remove featured image for this Team Member", "custom-post-type-ui" ),
+		"use_featured_image" => __( "Use as featured image for this Team Member", "custom-post-type-ui" ),
+		"archives" => __( "Team Member archives", "custom-post-type-ui" ),
+		"insert_into_item" => __( "Insert into Team Member", "custom-post-type-ui" ),
+		"uploaded_to_this_item" => __( "Upload to this Team Member", "custom-post-type-ui" ),
+		"filter_items_list" => __( "Filter Team Members list", "custom-post-type-ui" ),
+		"items_list_navigation" => __( "Team Members list navigation", "custom-post-type-ui" ),
+		"items_list" => __( "Team Members list", "custom-post-type-ui" ),
+		"attributes" => __( "Team Member attributes", "custom-post-type-ui" ),
+		"name_admin_bar" => __( "Team Member", "custom-post-type-ui" ),
+		"item_published" => __( "Team Member published", "custom-post-type-ui" ),
+		"item_published_privately" => __( "Team Member published privately.", "custom-post-type-ui" ),
+		"item_reverted_to_draft" => __( "Team Membersreverted to draft.", "custom-post-type-ui" ),
+		"item_scheduled" => __( "Team Member scheduled", "custom-post-type-ui" ),
+		"item_updated" => __( "Team Member updated.", "custom-post-type-ui" ),
+		"parent_item_colon" => __( "Parent Team Members:", "custom-post-type-ui" ),
+	];
+
+	$args = [
+		"label" => __( "Team Members", "custom-post-type-ui" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "teammembers",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => [ "slug" => "teammember", "with_front" => true ],
+		"query_var" => true,
+		"menu_icon" => "dashicons-groups",
+		"supports" => [ "title" ],
+	];
+
+	register_post_type( "teammember", $args );
+
+	/**
+	 * Post Type: Content Grids.
+	 */
+
+	$labels = [
+		"name" => __( "Content Grids", "custom-post-type-ui" ),
+		"singular_name" => __( "Content Grid", "custom-post-type-ui" ),
+		"menu_name" => __( "Content Grids", "custom-post-type-ui" ),
+		"all_items" => __( "All Content Grids", "custom-post-type-ui" ),
+		"add_new" => __( "Add new", "custom-post-type-ui" ),
+		"add_new_item" => __( "Add new Content Grid", "custom-post-type-ui" ),
+		"edit_item" => __( "Edit Content Grid", "custom-post-type-ui" ),
+		"new_item" => __( "New Content Grid", "custom-post-type-ui" ),
+		"view_item" => __( "View Content Grid", "custom-post-type-ui" ),
+		"view_items" => __( "View Content Grids", "custom-post-type-ui" ),
+		"search_items" => __( "Search Content Grids", "custom-post-type-ui" ),
+		"not_found" => __( "No Content Grids found", "custom-post-type-ui" ),
+		"not_found_in_trash" => __( "No Content Grids found in trash", "custom-post-type-ui" ),
+		"parent" => __( "Parent Content Grid:", "custom-post-type-ui" ),
+		"featured_image" => __( "Featured image for this Content Grid", "custom-post-type-ui" ),
+		"set_featured_image" => __( "Set featured image for this Content Grid", "custom-post-type-ui" ),
+		"remove_featured_image" => __( "Remove featured image for this Content Grid", "custom-post-type-ui" ),
+		"use_featured_image" => __( "Use as featured image for this Content Grid", "custom-post-type-ui" ),
+		"archives" => __( "Content Grid archives", "custom-post-type-ui" ),
+		"insert_into_item" => __( "Insert into Content Grid", "custom-post-type-ui" ),
+		"uploaded_to_this_item" => __( "Upload to this Content Grid", "custom-post-type-ui" ),
+		"filter_items_list" => __( "Filter Content Grids list", "custom-post-type-ui" ),
+		"items_list_navigation" => __( "Content Grids list navigation", "custom-post-type-ui" ),
+		"items_list" => __( "Content Grids list", "custom-post-type-ui" ),
+		"attributes" => __( "Content Grids attributes", "custom-post-type-ui" ),
+		"name_admin_bar" => __( "Content Grid", "custom-post-type-ui" ),
+		"item_published" => __( "Content Grid published", "custom-post-type-ui" ),
+		"item_published_privately" => __( "Content Grid published privately.", "custom-post-type-ui" ),
+		"item_reverted_to_draft" => __( "Content Grid reverted to draft.", "custom-post-type-ui" ),
+		"item_scheduled" => __( "Content Grid scheduled", "custom-post-type-ui" ),
+		"item_updated" => __( "Content Grid updated.", "custom-post-type-ui" ),
+		"parent_item_colon" => __( "Parent Content Grid:", "custom-post-type-ui" ),
+	];
+
+	$args = [
+		"label" => __( "Content Grids", "custom-post-type-ui" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "contentgrids",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => [ "slug" => "contentgrid", "with_front" => true ],
+		"query_var" => true,
+		"menu_icon" => "dashicons-list-view",
+		"supports" => [ "title" ],
+	];
+
+	register_post_type( "contentgrid", $args );
 }
+
+add_action( 'init', 'cptui_register_my_cpts' );
+
 
 add_action( 'init', 'cptui_register_my_cpts' );
 
