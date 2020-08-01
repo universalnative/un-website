@@ -27,6 +27,7 @@ import CookiePopup from '../components/cookie-popup';
 import Hero from '../components/hero';
 import ContentWithPreview from '../components/contentwithpreview';
 import Carousel from '../components/carousel';
+import ContentGrid from '../components/contentgrid';
 
 /**
  * Configure WPAPI.
@@ -43,6 +44,8 @@ wp.contentwithpreview = wp.registerRoute(
   '/contentwithpreview/(?P<id>\\d+)'
 );
 wp.carousel = wp.registerRoute('wp/v2', '/carousels/(?P<id>\\d+)');
+wp.contentgrid = wp.registerRoute('wp/v2', '/contentgrids/(?P<id>\\d+)');
+wp.teammember = wp.registerRoute('wp/v2', '/teammembers/(?P<id>\\d+)');
 
 /**
  * Returns a list of all page (route) objects.
@@ -62,6 +65,44 @@ const getAllPages = async () => {
 const getAllNavlinks = async () => {
   const links = await wp.navlinks();
   return links.map((link) => wpJsonToProps(link));
+};
+
+/**
+ * Fetches full data for each content (CPT) of the grid,
+ * and returns it along with the given data object.
+ *
+ * @param {Object} initialData
+ */
+const getContentGridFullData = async (initialData) => {
+  const gridType = initialData.acf.type;
+  const partialContentData =
+    initialData.acf.team_members || initialData.acf.articles || [];
+
+  let promises = [];
+  partialContentData.forEach((c) => {
+    const contentPostId = c.ID;
+    const contentPostType = c.post_type;
+    promises.push(wp[contentPostType]().id(contentPostId));
+  });
+
+  try {
+    const fullContentData = await Promise.all(promises);
+    let contentCollectionProp = '';
+
+    if (gridType === 'team') {
+      contentCollectionProp = 'team_members';
+    } else if (gridType === 'articles') {
+      contentCollectionProp = 'articles';
+    }
+
+    initialData.acf[contentCollectionProp] = fullContentData.map((data) =>
+      wpJsonToProps(data)
+    );
+  } catch (e) {
+    console.log(e);
+  } finally {
+    return initialData;
+  }
 };
 
 /**
@@ -92,23 +133,29 @@ export const getStaticProps = async ({ params }) => {
   const pageId = page.id;
   const pageSections = await wp.pagesections().param('unpages', pageId);
 
-  let promises = [];
+  let sectionPromises = [];
   pageSections.forEach((section) => {
     const sectionPostType = section.acf.content['post_type'];
     const sectionPostId = section.acf.content['ID'];
 
-    promises.push(wp[sectionPostType]().id(sectionPostId));
+    sectionPromises.push(wp[sectionPostType]().id(sectionPostId));
   });
 
   try {
-    const pageData = await Promise.all(promises);
-    pageData.forEach((sectionData) => {
+    const pageData = await Promise.all(sectionPromises);
+    for (let i = 0; i < pageData.length; i++) {
+      let sectionData = pageData[i];
+
+      if (sectionData.type === 'contentgrid') {
+        sectionData = await getContentGridFullData(sectionData);
+      }
+
       sections.push({
         id: sectionData.id,
         type: sectionData.type,
         data: wpJsonToProps(sectionData),
       });
-    });
+    }
   } catch (e) {
     console.log(e);
   }
@@ -141,10 +188,15 @@ const renderSections = (sections) => {
           <Carousel key={`carousel-${section.id}`} {...section.data} />
         );
         break;
+      case 'contentgrid':
+        sectionJsx.push(
+          <ContentGrid key={`contentgrid-${section.id}`} {...section.data} />
+        );
+        break;
     }
 
     if (index !== 0 && index !== sections.length - 1) {
-      sectionJsx.push(<hr className="my:8 lg:my-16" />);
+      sectionJsx.push(<hr className="my-8 lg:my-16" />);
     }
 
     return sectionJsx;
