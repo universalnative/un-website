@@ -35,10 +35,11 @@ const TeamMember = (props) => {
           />
         </a>
       </div>
-      <div className="member-bio mt-3">{props.bio}</div>
+      <div className="member-bio text-gray-600 mt-3">{props.bio}</div>
       <div className="member-career mt-3">
         <h4 className="text-xl font-bold mb-0">Career</h4>
         <span
+          className="text-gray-600"
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(props.career),
           }}
@@ -47,6 +48,7 @@ const TeamMember = (props) => {
       <div className="member-education mt-3">
         <h4 className="text-xl font-bold mb-0">Education</h4>
         <span
+          className="text-gray-600"
           dangerouslySetInnerHTML={{
             __html: sanitizeHtml(props.education),
           }}
@@ -54,7 +56,7 @@ const TeamMember = (props) => {
       </div>
       <div className="member-country mt-3">
         <h4 className="text-xl font-bold mb-0">Country</h4>
-        <span>{props.country}</span>
+        <span className="text-gray-600">{props.country}</span>
       </div>
     </div>
   );
