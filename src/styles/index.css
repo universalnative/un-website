@@ -51,6 +51,12 @@ header.bg-white .nav-link:hover {
   @apply text-gray-800;
 }
 
+@media (max-width: 1024px) {
+  .nav-link:not(.nav-button) {
+    @apply text-gray-700;
+  }
+}
+
 @media (min-width: 768px) {
   .cwp-preview iframe {
     width: 480px;
